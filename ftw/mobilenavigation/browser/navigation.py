@@ -15,6 +15,10 @@ def escape_html(text):
 
 class UpdateMobileNavigation(BrowserView):
 
+    def __init__(self, context, request):
+        super(UpdateMobileNavigation, self).__init__(context, request)
+        self.portal_url = getToolByName(context, 'portal_url')()
+
     def __call__(self):
         # Disable theming for ajax requests
         self.request.response.setHeader('X-Theme-Disabled', 'True')
@@ -87,6 +91,16 @@ class UpdateMobileNavigation(BrowserView):
             classes.append('noChildren')
         classes.append('level%s' % level)
         return ' '.join(classes)
+
+    def getUrlForFullpageView(self, context):
+        """ Returns a URL for the given context which will navigate within the
+        fullpage view.
+        """
+        normal_url = context.absolute_url().strip('/')
+        transformed_url = normal_url.replace(self.portal_url+'/',
+                                             self.portal_url+'/#')
+
+        return transformed_url
 
 
 class SliderNavigation(UpdateMobileNavigation):

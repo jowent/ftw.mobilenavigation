@@ -4,12 +4,12 @@
   <ul class="mobileNavigation globalnav">
     <tal:parent tal:condition="nocall:parent">
       <li>
-        <a tal:attributes="href parent/absolute_url;
+        <a tal:attributes="href python:view.getUrlForFullpageView(parent);
                            title parent/Title"
            class="slideBack">
           &nbsp;
         </a>
-        <a tal:attributes="href context/absolute_url;
+        <a tal:attributes="href python:view.getUrlForFullpageView(context);
                            title context/Title"
            class="current">
           <span tal:content="context/Title" />
@@ -20,8 +20,9 @@
     <tal:children tal:repeat="child children">
       <li tal:define="has_children python:view.sub_objects(child)"
           tal:attributes="class python:not has_children and 'noChildren' or None">
-        <a tal:attributes="href child/absolute_url;
-                           title child/Title;">
+        <a tal:attributes="href python:view.getUrlForFullpageView(child);
+                           title child/Title;"
+           class="slideItem">
           <span tal:content="child/Title" />
         </a>
         <a tal:condition="has_children"
