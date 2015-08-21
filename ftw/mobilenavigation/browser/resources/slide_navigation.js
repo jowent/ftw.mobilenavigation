@@ -66,9 +66,16 @@ jQuery(function($) {
     slide.call(this, direction.prev);
   }
 
+  var slide_item_handler = function(e) {
+    $('#slider-container').toggle(false);
+    $('#toggle_slidenavi').removeClass('selected');
+    $('body').removeClass('slideNaviOpen');
+  }
+
   if (typeof $.fn.on !== undefined) {
     $(document).on('click', 'a.slide', slide_handler);
     $(document).on('click', 'a.slideBack', slide_back_handler);
+    $(document).on('click', '.mobileNavigation a.slideItem, .mobileNavigation a.current', slide_item_handler);
   } else {
     $('a.slide').live('click', click_handler);
     $('a.slideBack').live('click', click_back_handler);
