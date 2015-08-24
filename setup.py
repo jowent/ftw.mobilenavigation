@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import os
 
-version = '1.4.3-jowent-1'
+version = '1.4.3-jowent-2'
 
 maintainer = 'Julian Infanger'
 
